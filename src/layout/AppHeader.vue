@@ -2,7 +2,9 @@
     <header class="header-global">
         <base-nav class="navbar-main" transparent type="" effect="light" expand>
             <router-link slot="brand" class="navbar-brand mr-lg-5" to="/">
-                <img src="img/brand/logoTP.jpg" alt="logo">
+                <img src="img/brand/logoTP.jpg" alt="logo"
+                    style="height:60px;"
+                >
             </router-link>
 
             <div class="row" slot="content-header" slot-scope="{closeMenu}">
@@ -21,13 +23,13 @@
                         <span class="nav-link-inner--text d-lg-none">Instagram</span>
                     </a>
                 </li>
-                <li class="nav-item d-none d-lg-block ml-lg-4">
+                <li class="nav-item d-lg-block ml-lg-4">
                     <a href="/#/register" rel="noopener"
                         class="btn btn-secondary btn-icon">
-                        <span class="nav-link-inner--text">Register</span>
+                        <span class="nav-link-inner--text">Join Us</span>
                     </a>
                 </li>
-                <li class="nav-item d-none d-lg-block ml-lg-4">
+                <li class="nav-item d-lg-block ml-lg-4">
                     <a href="/#/login" rel="noopener"
                         class="btn btn-primary btn-icon"
                         style="background:grey; border-color:grey"
