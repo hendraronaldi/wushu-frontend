@@ -1,6 +1,8 @@
 <template>
     <section class="section section-shaped section-lg my-0">
-        <div class="shape shape-style-1 bg-default">
+        <div class="shape shape-style-1"
+            style="background:black;"
+        >
         </div>
         <div class="container pt-lg-md">
             <div class="row justify-content-center">
@@ -129,7 +131,9 @@
                                     <input aria-describedby="addon-right addon-left" placeholder="Parent's Address" class="form-control">
                                 </div>
                                 <div class="text-center">
-                                    <button type="button" class="btn my-4 btn-primary">Create account request</button>
+                                    <button type="button" class="btn my-4 btn-primary"
+                                        style="background:grey; border-color:grey;"
+                                    >Create account request</button>
                                 </div>
                             </form>
                         </template>

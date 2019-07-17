@@ -1,6 +1,8 @@
 <template>
     <section class="section section-shaped section-lg my-0">
-        <div class="shape shape-style-1 bg-default">
+        <div class="shape shape-style-1"
+            style="background:black;"
+        >
         </div>
         <div class="container pt-lg-md">
             <div class="row justify-content-center">
@@ -25,7 +27,9 @@
                                             addon-left-icon="ni ni-lock-circle-open">
                                 </base-input>
                                 <div class="text-center">
-                                    <base-button type="primary" class="my-4">Sign In</base-button>
+                                    <base-button type="primary" class="my-4"
+                                        style="background:grey; border-color:grey;"
+                                    >Sign In</base-button>
                                 </div>
                             </form>
                         </template>

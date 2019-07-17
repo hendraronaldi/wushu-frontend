@@ -23,13 +23,15 @@
                 </li>
                 <li class="nav-item d-none d-lg-block ml-lg-4">
                     <a href="/#/register" rel="noopener"
-                        class="btn btn-neutral btn-icon">
+                        class="btn btn-secondary btn-icon">
                         <span class="nav-link-inner--text">Register</span>
                     </a>
                 </li>
                 <li class="nav-item d-none d-lg-block ml-lg-4">
                     <a href="/#/login" rel="noopener"
-                        class="btn btn-primary btn-icon">
+                        class="btn btn-primary btn-icon"
+                        style="background:grey; border-color:grey"
+                        >
                         <span class="nav-link-inner--text">Login</span>
                     </a>
                 </li>
