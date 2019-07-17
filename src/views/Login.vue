@@ -16,16 +16,22 @@
                                 <small>Sign in</small>
                             </div>
                             <form role="form">
-                                <base-input alternative
-                                            class="mb-3"
-                                            placeholder="Username"
-                                            addon-left-icon="ni ni-single-02">
-                                </base-input>
-                                <base-input alternative
-                                            type="password"
-                                            placeholder="Password"
-                                            addon-left-icon="ni ni-lock-circle-open">
-                                </base-input>
+                                <div class="form-group mb-3 input-group input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="ni ni-single-02"></i>
+                                        </span>
+                                    </div>
+                                    <input aria-describedby="addon-right addon-left" placeholder="Username" class="form-control" required>
+                                </div>
+                                <div class="form-group input-group input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="ni ni-lock-circle-open"></i>
+                                        </span>
+                                    </div>
+                                    <input aria-describedby="addon-right addon-left" type="password" placeholder="Password" class="form-control" required>
+                                </div>
                                 <div class="text-center">
                                     <base-button type="primary" class="my-4"
                                         style="background:grey; border-color:grey;"

@@ -22,7 +22,7 @@
                                             <i class="ni ni-circle-08"></i>
                                         </span>
                                     </div>
-                                    <input aria-describedby="addon-right addon-left" placeholder="Name" class="form-control">
+                                    <input aria-describedby="addon-right addon-left" placeholder="Name" class="form-control" required>
                                 </div>
                                 <div class="form-group mb-3 input-group input-group-alternative">
                                     <div class="input-group-prepend">
@@ -30,7 +30,7 @@
                                             <i class="ni ni-single-02"></i>
                                         </span>
                                     </div>
-                                    <input aria-describedby="addon-right addon-left" placeholder="Username" class="form-control">
+                                    <input aria-describedby="addon-right addon-left" placeholder="Username" class="form-control" required>
                                 </div>
                                 <div class="form-group mb-3 input-group input-group-alternative">
                                 <div class="input-group-prepend">
@@ -38,7 +38,7 @@
                                         <i class="ni ni-email-83"></i>
                                     </span>
                                 </div>
-                                <input aria-describedby="addon-right addon-left" placeholder="Email" class="form-control">
+                                <input aria-describedby="addon-right addon-left" placeholder="Email" class="form-control" required>
                                 </div>
                                 <div class="form-group input-group input-group-alternative">
                                     <div class="input-group-prepend">
@@ -46,7 +46,7 @@
                                             <i class="ni ni-lock-circle-open"></i>
                                         </span>
                                     </div>
-                                    <input aria-describedby="addon-right addon-left" type="password" placeholder="Password" class="form-control">
+                                    <input aria-describedby="addon-right addon-left" type="password" placeholder="Password" class="form-control" required>
                                 </div>
                                 <label>Birthdate</label>
                                 <base-input alternative addon-left-icon="ni ni-calendar-grid-58">
@@ -64,7 +64,7 @@
                                             <i class="ni ni-pin-3"></i>
                                         </span>
                                     </div>
-                                    <input aria-describedby="addon-right addon-left" placeholder="Birthplace" class="form-control">
+                                    <input aria-describedby="addon-right addon-left" placeholder="Birthplace" class="form-control" required>
                                 </div>
                                 <div class="form-group mb-3 input-group input-group-alternative">
                                     <div class="input-group-prepend">
@@ -72,7 +72,7 @@
                                             <i class="ni ni-mobile-button"></i>
                                         </span>
                                     </div>
-                                    <input aria-describedby="addon-right addon-left" placeholder="Phone" class="form-control">
+                                    <input aria-describedby="addon-right addon-left" placeholder="Phone" class="form-control" required>
                                 </div>
                                 <div class="form-group mb-3 input-group input-group-alternative">
                                     <div class="input-group-prepend">
@@ -80,7 +80,7 @@
                                             <i class="ni ni-map-big"></i>
                                         </span>
                                     </div>
-                                    <input aria-describedby="addon-right addon-left" placeholder="Address" class="form-control">
+                                    <input aria-describedby="addon-right addon-left" placeholder="Address" class="form-control" required>
                                 </div>
                                 <div class="form-group mb-3 input-group input-group-alternative">
                                     <div class="input-group-prepend">
@@ -88,7 +88,7 @@
                                             <i class="ni ni-hat-3"></i>
                                         </span>
                                     </div>
-                                    <input aria-describedby="addon-right addon-left" placeholder="Education" class="form-control">
+                                    <input aria-describedby="addon-right addon-left" placeholder="Education" class="form-control" required>
                                 </div>
                                 <div class="form-group mb-3 input-group input-group-alternative">
                                     <div class="input-group-prepend">
@@ -112,7 +112,7 @@
                                             <i class="ni ni-circle-08"></i>
                                         </span>
                                     </div>
-                                    <input aria-describedby="addon-right addon-left" placeholder="Parent's Name" class="form-control">
+                                    <input aria-describedby="addon-right addon-left" placeholder="Parent's Name" class="form-control" required>
                                 </div>
                                 <div class="form-group mb-3 input-group input-group-alternative">
                                     <div class="input-group-prepend">
@@ -120,7 +120,7 @@
                                             <i class="ni ni-mobile-button"></i>
                                         </span>
                                     </div>
-                                    <input aria-describedby="addon-right addon-left" placeholder="Parent's Phone" class="form-control">
+                                    <input aria-describedby="addon-right addon-left" placeholder="Parent's Phone" class="form-control" required>
                                 </div>
                                 <div class="form-group mb-3 input-group input-group-alternative">
                                     <div class="input-group-prepend">
@@ -128,7 +128,7 @@
                                             <i class="ni ni-map-big"></i>
                                         </span>
                                     </div>
-                                    <input aria-describedby="addon-right addon-left" placeholder="Parent's Address" class="form-control">
+                                    <input aria-describedby="addon-right addon-left" placeholder="Parent's Address" class="form-control" required>
                                 </div>
                                 <div class="text-center">
                                     <button type="button" class="btn my-4 btn-primary"
