@@ -1,14 +1,6 @@
 <template>
     <section class="section section-shaped section-lg my-0">
-        <div class="shape shape-style-1 bg-gradient-default">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="shape shape-style-1 bg-default">
         </div>
         <div class="container pt-lg-md">
             <div class="row justify-content-center">
@@ -44,7 +36,7 @@
                                 <small>Forgot password?</small>
                             </a>
                         </div> -->
-                        <div class="col-6 text-right">
+                        <div class="col-12 text-right">
                             <a href="/#/register" class="text-light">
                                 <small>Create new account</small>
                             </a>
