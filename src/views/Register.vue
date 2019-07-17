@@ -17,7 +17,7 @@
                                 <div class="form-group mb-3 input-group input-group-alternative">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
-                                            <i class="ni ni-hat-3"></i>
+                                            <i class="ni ni-circle-08"></i>
                                         </span>
                                     </div>
                                     <input aria-describedby="addon-right addon-left" placeholder="Name" class="form-control">
@@ -129,7 +129,7 @@
                                     <input aria-describedby="addon-right addon-left" placeholder="Parent's Address" class="form-control">
                                 </div>
                                 <div class="text-center">
-                                    <button type="button" class="btn my-4 btn-primary">Create account</button>
+                                    <button type="button" class="btn my-4 btn-primary">Create account request</button>
                                 </div>
                             </form>
                         </template>
