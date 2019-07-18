@@ -5,6 +5,18 @@
             <!-- shape Hero -->
             <section class="section-shaped my-0">
                 <div class="shape shape-style-1 shape-default shape-skew" style="background:black">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
                 <div class="container shape-container d-flex">
                     <div class="col px-0">

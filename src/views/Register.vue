@@ -3,6 +3,18 @@
         <div class="shape shape-style-1"
             style="background:black;"
         >
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
         <div class="container pt-lg-md">
             <div class="row justify-content-center">
