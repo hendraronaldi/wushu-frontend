@@ -18,5 +18,4 @@ function login(state, user) {
 function register(state, user) {
     Vue.set(state, 'userLogged', true);
     Vue.set(state, 'userProfile', user);
-    Vue.set(state, 'newUser', user);
 }

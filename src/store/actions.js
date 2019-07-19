@@ -1,13 +1,9 @@
-import * as api from '../api';
+import * as api from '../api/authentication/auth.js';
 
 export const login = ({commit}, payload) => {
-    api.login(payload => {
-        commit('login', payload.data)
-    })
+    commit('login', api.login(payload))
 }
 
 export const register = ({commit}, payload) => {
-    api.register(payload => {
-        commit('register', payload.data)
-    })
+    commit('register', api.register(payload))
 }
