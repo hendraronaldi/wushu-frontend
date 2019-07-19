@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+import PrivateHeader from "./layout/PrivateHeader";
 import AppHeader from "./layout/AppHeader";
 import AppFooter from "./layout/AppFooter";
 import Components from "./views/Components.vue";
@@ -53,7 +54,7 @@ export default new Router({
       path: "/profile",
       name: "profile",
       components: {
-        header: AppHeader,
+        header: PrivateHeader,
         default: Profile,
         footer: AppFooter
       }
