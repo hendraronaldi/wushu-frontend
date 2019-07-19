@@ -187,7 +187,6 @@ export default {
         register(dispatch, e){
             e.preventDefault();
             const {user} = this;
-            console.log(user);
             dispatch('register', {
                 user
             })
