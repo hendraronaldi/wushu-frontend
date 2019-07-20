@@ -18,11 +18,11 @@
         </div>
 
         <template>
-            <div v-if="fail" class="alert alert-danger" role="alert">
+            <div v-if="fail" class="alert alert-danger fade show" role="alert">
                 User existed already, please change your username
             </div>
             <div v-else></div>
-        </template>>
+        </template>
 
         <div class="container pt-lg-md">
             <div class="row justify-content-center">
@@ -172,7 +172,6 @@ import {mapActions} from 'vuex';
 import flatPicker from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import { constants } from 'crypto';
-import { setTimeout } from 'timers';
 
 export default {
     components: {flatPicker},
