@@ -16,6 +16,14 @@
             <span></span>
             <span></span>
         </div>
+
+        <template>
+            <div v-if="fail" class="alert alert-danger" role="alert">
+                User existed already, please change your username
+            </div>
+            <div v-else></div>
+        </template>>
+
         <div class="container pt-lg-md">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
@@ -143,9 +151,13 @@
                                     <input v-model="user.addressparent" aria-describedby="addon-right addon-left" placeholder="Parent's Address" class="form-control" required>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn my-4 btn-primary"
+                                    <button v-if="!isFetching" type="submit" class="btn my-4 btn-primary"
                                         style="background:grey; border-color:grey;"
                                     >Create account request</button>
+                                    <button v-else type="button" class="btn my-4 btn-primary"
+                                        style="background:grey; border-color:grey;"
+                                        disabled
+                                    >Please wait a minute</button>
                                 </div>
                             </form>
                         </template>
@@ -160,6 +172,7 @@ import {mapActions} from 'vuex';
 import flatPicker from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import { constants } from 'crypto';
+import { setTimeout } from 'timers';
 
 export default {
     components: {flatPicker},
@@ -180,15 +193,32 @@ export default {
                 phoneparent: "",
                 addressparent: "",
                 status: 0
-            }
+            },
+            isFetching: false,
+            fail: false
         };
     },
     methods: mapActions({
         register(dispatch, e){
             e.preventDefault();
             const {user} = this;
-            dispatch('register', {
-                user
+            this.isFetching = true;
+            dispatch('register', {user})
+            .then((response) => {
+                alert("Success! New user created")
+                this.$router.push("/profile")
+            })
+            .catch(error => {
+                this.fail = true;
+            })
+            .finally(() => {
+                if(this.fail) {
+                    setTimeout(function(){
+                        this.fail = false;
+                    }, 3000);
+                }
+
+                this.isFetching = false;
             })
         }
     })

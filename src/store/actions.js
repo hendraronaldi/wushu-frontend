@@ -1,9 +1,22 @@
-import * as api from '../api/authentication/auth.js';
+import axios from 'axios';
+import {BASE_URL} from '../api/config/config.js';
 
-export const login = ({commit}, payload) => {
-    commit('login', api.login(payload))
+export const login = async ({commit}, payload) => {
+    try {
+        const response = await axios.post(BASE_URL + "/login", payload.user)
+        commit('login', response)
+        return Promise.resolve(response.data.response)
+    } catch (e) {
+        return Promise.reject(e)
+    }
 }
 
-export const register = ({commit}, payload) => {
-    commit('register', api.register(payload))
+export const register = async ({commit}, payload) => {
+    try {
+        const response = await axios.post(BASE_URL + "/register", payload.user)
+        commit('register', response)
+        return Promise.resolve(response.data.response)
+    } catch (e) {
+        return Promise.reject(e)
+    }
 }
