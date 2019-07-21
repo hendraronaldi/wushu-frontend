@@ -8,6 +8,8 @@ import Landing from "./views/Landing.vue";
 import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Profile from "./views/Profile.vue";
+import AdminLogin from "./views/admin/Login.vue";
+import AdminConfirmation from "./views/admin/Confirmation.vue";
 
 Vue.use(Router);
 
@@ -56,6 +58,24 @@ export default new Router({
       components: {
         header: PrivateHeader,
         default: Profile,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/admin-login",
+      name: "admin-login",
+      components: {
+        header: AppHeader,
+        default: AdminLogin,
+        footer: AppFooter
+      }
+    },
+    {
+      path: "/admin-confirmation",
+      name: "admin-confirmation",
+      components: {
+        header: PrivateHeader,
+        default: AdminConfirmation,
         footer: AppFooter
       }
     }
