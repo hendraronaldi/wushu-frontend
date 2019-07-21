@@ -4,18 +4,18 @@
             <div class="shape shape-style-1 shape-primary shape-skew alpha-4"
                 style="background:black;"
             >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </section>
         <section class="section section-skew">
@@ -36,8 +36,8 @@
                                 <div class="d-flex justify-content-between">
                                     <h6 class="mb-0">Profile</h6>
                                     <span v-if="userProfile.Status == 1" class="badge badge-success float-right">Verified</span>
-                                    <span v-else-if="userProfile.Status == 2" class="badge badge-success float-right">Rejected</span>
-                                    <span v-else class="badge badge-success float-right">Pending</span>
+                                    <span v-else-if="userProfile.Status == 2" class="badge badge-danger float-right">Rejected</span>
+                                    <span v-else class="badge badge-warning float-right">Pending</span>
                                 </div>
                             </div>
                             <div class="card-body pt-0 pt-md-4">
@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form>
+                                <form role="form" @submit="editUser">
                                     <h6 class="heading-small text-muted mb-4">User information</h6>
                                     <div class="pl-lg-4">
                                         <div class="row">
@@ -134,7 +134,7 @@
                                                     <label class="form-control-label">
                                                         New password
                                                     </label>
-                                                    <input v-model="user.newpassword" v-if="isEditProfile" type="password" aria-describedby="addon-right addon-left" alternative="" placeholder="New password" class="form-control form-control-alternative">
+                                                    <input v-model="newpassword" v-if="isEditProfile" type="password" aria-describedby="addon-right addon-left" alternative="" placeholder="New password" class="form-control form-control-alternative">
                                                     <input v-else type="password" aria-describedby="addon-right addon-left" alternative="" placeholder="New password" class="form-control form-control-alternative" disabled>
                                                 </div>
                                             </div>
@@ -143,7 +143,7 @@
                                                     <label class="form-control-label">
                                                         Confirm new password
                                                     </label>
-                                                    <input v-model="user.confirmpassword" v-if="isEditProfile" type="password" aria-describedby="addon-right addon-left" alternative="" placeholder="Confirm new password" class="form-control form-control-alternative">
+                                                    <input v-model="confirmpassword" v-if="isEditProfile" type="password" aria-describedby="addon-right addon-left" alternative="" placeholder="Confirm new password" class="form-control form-control-alternative">
                                                     <input v-else type="password" aria-describedby="addon-right addon-left" alternative="" placeholder="Confirm new password" class="form-control form-control-alternative" disabled>
                                                 </div>
                                             </div>
@@ -257,7 +257,7 @@
                                     <hr v-if="isEditProfile" class="my-4">
                                     <div v-if="isEditProfile" class="text-center">
                                         <button v-if="!isSavingProfile" type="submit" class="btn my-4 btn-primary">Save</button>
-                                        <button v-else type="button" class="btn my-4 btn-primary" disabled>Saving</button>
+                                        <button v-else type="button" class="btn my-4 btn-primary" disabled>Saving Profile...</button>
                                         <button type="button" @click="cancelEditProfile()" class="btn my-4 btn-secondary">Cancel</button>
                                     </div>
                                 </form>
@@ -279,15 +279,18 @@ export default {
     components: {flatPicker},
     data(){
         return {
+            success: false,
+            fail: false,
             isEditProfile: false,
             isSavingProfile: false,
+            newpassword: this.$store.state.userProfile.Password,
+            confirmpassword: this.$store.state.userProfile.Password,
             user: {
                 name: this.$store.state.userProfile.Name,
+                address: this.$store.state.userProfile.Address,
                 username: this.$store.state.userProfile.Username,
                 email: this.$store.state.userProfile.Email,
                 password: this.$store.state.userProfile.Password,
-                newpassword: this.$store.state.userProfile.Password,
-                confirmpassword: this.$store.state.userProfile.Password,
                 birthplace: this.$store.state.userProfile.Birthplace,
                 phone: this.$store.state.userProfile.Phone,
                 education: this.$store.state.userProfile.Education,
@@ -305,11 +308,10 @@ export default {
             'currentUser'
         ]),
         ...mapState([
-            'userLogged',
             'userProfile'
         ])
     },
-    methods: {
+    methods: mapActions({
         toggleEditProfile(){
             this.isEditProfile = !this.isEditProfile;
         },
@@ -319,14 +321,52 @@ export default {
             for(var key in this.$store.state.userProfile){
                 this.user[key.toLowerCase()] = this.$store.state.userProfile[key];
             }
-            this.user.newpassword = this.$store.state.userProfile.Password;
-            this.user.confirmpassword = this.$store.state.userProfile.Password;
+            this.newpassword = this.$store.state.userProfile.Password;
+            this.confirmpassword = this.$store.state.userProfile.Password;
         },
 
-        saveEditProfile(){
-            this.toggleEditProfile();
+        editUser(dispatch, e){
+            e.preventDefault();
+            this.isSavingProfile = true;
+            if(this.newpassword == this.confirmpassword && this.newpassword != ""){
+                for(var key in this.$store.state.userProfile){
+                    if(this.user[key.toLowerCase() == '']){
+                        this.user[key.toLowerCase()] = this.$store.state.userProfile[key];
+                    }
+                }
+                const {user} = this;
+                dispatch('editUser', {user})
+                .then((response) => {
+                    console.log(this.$store.state.userProfile)
+                    for(var key in response){
+                        this.user[key.toLowerCase()] = response[key];
+                    }
+                    this.newpassword = response.password;
+                    this.confirmpassword = response.password;
+                    this.success = true;
+                })
+                .catch(error => {
+                    this.fail = true;
+                })
+                .finally(() => {
+                    if(this.fail) {
+                        setTimeout(function(){
+                            this.fail = false;
+                        }, 3000);
+                    }
+                    if(this.success) {
+                        setTimeout(function(){
+                            this.success = false;
+                        }, 3000);
+                    }
+                    this.isSavingProfile = false;
+                    this.toggleEditProfile();
+                })
+            } else {
+                this.isSavingProfile = false;
+            }
         }
-    }
+    })
 };
 </script>
 <style>
