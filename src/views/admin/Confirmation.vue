@@ -132,11 +132,12 @@ export default {
             const {targetedUser} = this;
             dispatch('validateUser', {targetedUser})
             .then((response) => {
+                alert("User is validated")
                 this.users = this.users.filter(user => user.Username != response.Username);
                 this.users.push(response);
             })
             .catch(error => {
-
+                alert("Oops, something wrong! Please try again")
             })
             .finally(() => {
                 this.isFetchingValidation = false;
@@ -149,11 +150,12 @@ export default {
             const {targetedUser} = this;
             dispatch('rejectUser', {targetedUser})
             .then((response) => {
+                alert("User is rejected")
                 this.users = this.users.filter(user => user.Username != response.Username);
                 this.users.push(response);
             })
             .catch(error => {
-
+                alert("Oops, something wrong! Please try again")
             })
             .finally(() => {
                 this.isFetchingValidation = false;
