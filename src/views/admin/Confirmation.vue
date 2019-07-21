@@ -35,29 +35,47 @@
                                 <div class="nav-wrapper">
                                     <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
                                         <li class="nav-item">
-                                            <button @click="toggleCategory(0)" class="btn btn-warning my-1" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true">{{category[0]}}</button>
+                                            <button @click="toggleCategory(0)" class="btn btn-warning my-1">{{category[0]}}</button>
                                         </li>
                                         <li class="nav-item">
-                                            <button @click="toggleCategory(1)" class="btn btn-success my-1" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false">{{category[1]}}</button>
+                                            <button @click="toggleCategory(1)" class="btn btn-success my-1">{{category[1]}}</button>
                                         </li>
                                         <li class="nav-item">
-                                            <button @click="toggleCategory(2)" class="btn btn-danger my-1" id="tabs-icons-text-3-tab" data-toggle="tab" href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false">{{category[2]}}</button>
+                                            <button @click="toggleCategory(2)" class="btn btn-danger my-1">{{category[2]}}</button>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="card shadow">
                                     <div class="card-body">
-                                        <div class="tab-content" id="myTabContent">
-                                            <div v-if="activeCategory == 0" class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
-                                                <p class="description">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
-                                                <p class="description">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse.</p>
-                                            </div>
-                                            <div v-else-if="activeCategory == 1" class="tab-pane fade show active" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
-                                                <p class="description">Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-                                            </div>
-                                            <div v-else class="tab-pane fade show active" id="tabs-icons-text-3" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
-                                                <p class="description">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
-                                            </div>
+                                        <div class="table-responsive">
+                                            <table class="table tablesorter table align-items-center table-flush">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>Users</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="list">
+                                                    <tr v-bind:key="user.Username" v-for="user in users" v-if="user.Status == activeCategory">
+                                                        <th scope="row">
+                                                            <div class="media align-items-center">
+                                                                <div class="media-body"><span class="name mb-0 text-sm">{{user.Name}}</span></div>
+                                                            </div>
+                                                        </th>
+                                                        <td v-if="user.Status == 0">
+                                                            <button class="btn btn-info my-1">Details</button>
+                                                            <button @click="rejectUser(user)" class="btn btn-danger my-1">Reject</button>
+                                                            <button @click="validateUser(user)" class="btn btn-success my-1">Accept</button>
+                                                        </td>
+                                                        <td v-else-if="user.Status == 1">
+                                                            <span class="badge badge-dot mr-4 badge-success"><i class="bg-success"></i><span class="status">Verified</span></span>
+                                                        </td>
+                                                        <td v-else-if="user.Status == 2">
+                                                            <span class="badge badge-dot mr-4 badge-danger"><i class="bg-danger"></i><span class="status">Rejected</span></span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -70,19 +88,87 @@
     </div>
 </template>
 <script>
+import {mapActions, mapGetters, mapState} from 'vuex';
 
 export default {
+    created() {
+        this.$store.dispatch('getAllUsers')
+        .then((response) => {
+            this.users = response;
+        })
+        .catch(error => {
+            this.users = [];
+        })
+        .finally(() => {
+            this.isFetchingUsers = false;
+        })
+    },
+
     data(){
         return {
+            isFetchingUsers: false,
+            isFetchingValidation: false,
             category: ['Pending', 'Verified', 'Rejected'],
-            activeCategory: 0
+            activeCategory: 0,
+            users: [],
+            targetedUser: {}
         }
     },
-    methods: {
-        toggleCategory(index) {
+
+    methods: mapActions({
+        toggleCategory(dispatch, index) {
             this.activeCategory = index;
-        }
-    }
+        },
+
+        setTargetUser(dispatch, user) {
+            for(var key in user){
+                this.targetedUser[key.toLowerCase()] = user[key];
+            }
+        },
+
+        validateUser(dispatch, user){
+            this.setTargetUser(user);
+            this.isFetchingValidation = true;
+            const {targetedUser} = this;
+            dispatch('validateUser', {targetedUser})
+            .then((response) => {
+                this.users = this.users.filter(user => user.Username != response.Username);
+                this.users.push(response);
+            })
+            .catch(error => {
+
+            })
+            .finally(() => {
+                this.isFetchingValidation = false;
+            })
+        },
+
+        rejectUser(dispatch, user){
+            this.setTargetUser(user);
+            this.isFetchingValidation = true;
+            const {targetedUser} = this;
+            dispatch('rejectUser', {targetedUser})
+            .then((response) => {
+                this.users = this.users.filter(user => user.Username != response.Username);
+                this.users.push(response);
+            })
+            .catch(error => {
+
+            })
+            .finally(() => {
+                this.isFetchingValidation = false;
+            })
+        },
+    }),
+
+    computed: {
+        ...mapGetters([
+            'currentAdmin'
+        ]),
+        ...mapState([
+            'admin'
+        ])
+    },
 };
 </script>
 <style>
