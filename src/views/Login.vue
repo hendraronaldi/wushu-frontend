@@ -18,7 +18,7 @@
         </div>
 
         <template>
-            <div v-if="fail" class="alert alert-danger fade show" role="alert">
+            <div v-show="fail" class="alert alert-danger fade show" role="alert">
                 Wrong username or password, please try again
             </div>
         </template>
@@ -58,7 +58,7 @@
                                     <button v-else type="button" class="btn my-4 btn-primary"
                                         style="background:grey; border-color:grey;"
                                         disabled
-                                    >Please wait a minute</button>
+                                    >Logging in...</button>
                                 </div>
                             </form>
                         </template>
