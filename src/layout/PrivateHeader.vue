@@ -75,7 +75,6 @@ export default {
             'currentUser'
         ]),
         ...mapState([
-            'userLogged',
             'userProfile'
         ])
     },
