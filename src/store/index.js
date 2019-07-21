@@ -7,8 +7,8 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 const state = {
-    userLogged: false,
-    userProfile: null
+    userProfile: JSON.parse(localStorage.getItem("userProfile")) || null,
+    admin: JSON.parse(localStorage.getItem("admin")) || null
 }
 
 export default new Vuex.Store({
