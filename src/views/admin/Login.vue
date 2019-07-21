@@ -34,7 +34,7 @@
                             <div class="text-center text-muted mb-4">
                                 <small>Sign in as admin</small>
                             </div>
-                            <form role="form">
+                            <form role="form" @submit="adminLogin">
                                 <div class="form-group mb-3 input-group input-group-alternative">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
@@ -82,29 +82,29 @@ export default {
             fail: false
         };
     },
-    // methods: mapActions({
-    //     login(dispatch, e){
-    //         e.preventDefault();
-    //         const {user} = this;
-    //         this.isFetching = true;
-    //         dispatch('login', {user})
-    //         .then((response) => {
-    //             this.$router.push("/profile")
-    //         })
-    //         .catch(error => {
-    //             this.fail = true;
-    //         })
-    //         .finally(() => {
-    //             if(this.fail) {
-    //                 setTimeout(function(){
-    //                     this.fail = false;
-    //                 }, 3000);
-    //             }
+    methods: mapActions({
+        adminLogin(dispatch, e){
+            e.preventDefault();
+            const {user} = this;
+            this.isFetching = true;
+            dispatch('adminLogin', {user})
+            .then((response) => {
+                this.$router.push("/admin-confirmation")
+            })
+            .catch(error => {
+                this.fail = true;
+            })
+            .finally(() => {
+                if(this.fail) {
+                    setTimeout(function(){
+                        this.fail = false;
+                    }, 3000);
+                }
 
-    //             this.isFetching = false;
-    //         })
-    //     }
-    // })
+                this.isFetching = false;
+            })
+        }
+    })
 };
 </script>
 <style>
