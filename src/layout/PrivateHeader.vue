@@ -24,28 +24,66 @@
                     </a>
                 </li>
                 <li class="nav-item d-lg-block ml-lg-4">
-                    <a href="/#/login" rel="noopener"
+                    <button @click="logout()" href="" rel="noopener"
                         class="btn btn-primary btn-icon"
                         style="background:grey; border-color:grey"
                         >
                         <span class="nav-link-inner--text">Logout</span>
-                    </a>
+                    </button>
                 </li>
             </ul>
         </base-nav>
     </header>
 </template>
 <script>
+import {mapActions, mapGetters, mapState} from 'vuex';
 import BaseNav from "@/components/BaseNav";
 import BaseDropdown from "@/components/BaseDropdown";
 import CloseButton from "@/components/CloseButton";
 
 export default {
-  components: {
-    BaseNav,
-    CloseButton,
-    BaseDropdown
-  }
+    data() {
+        return {
+            isFetching: false,
+            fail: false
+        };
+    },
+    methods: mapActions({
+        logout(dispatch){
+            const {userProfile} = this.$store.state;
+            this.isFetching = true;
+            dispatch('logout', {userProfile})
+            .then((response) => {
+                this.$router.push("/")
+            })
+            .catch(error => {
+                this.fail = true;
+            })
+            .finally(() => {
+                if(this.fail) {
+                    setTimeout(function(){
+                        this.fail = false;
+                    }, 3000);
+                }
+
+                this.isFetching = false;
+            })
+        }
+    }),
+    computed: {
+        ...mapGetters([
+            'currentUser'
+        ]),
+        ...mapState([
+            'userLogged',
+            'userProfile'
+        ])
+    },
+    components: {
+        BaseNav,
+        CloseButton,
+        BaseDropdown
+    }
 };
 </script>
 <style>
