@@ -337,7 +337,6 @@ export default {
                 const {user} = this;
                 dispatch('editUser', {user})
                 .then((response) => {
-                    console.log(this.$store.state.userProfile)
                     for(var key in response){
                         this.user[key.toLowerCase()] = response[key];
                     }
