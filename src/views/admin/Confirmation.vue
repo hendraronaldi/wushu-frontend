@@ -48,6 +48,49 @@
                                 <div class="card shadow">
                                     <div class="card-body">
                                         <div class="table-responsive">
+
+                                            <!-- Modal User Details -->
+                                            <div tabindex="-1" role="dialog" v-bind:class="showUserDetails" style="">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h6 id="modal-title-default" class="modal-title">{{activeUser.Name}}</h6>
+                                                            <button @click="toggleUserDetails(activeUser)" type="button" data-dismiss="modal" aria-label="Close" class="close"><span>×</span></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table tablesorter table align-items-center table-flush">
+                                                                <thead class="thead-light">
+                                                                    <tr>
+                                                                        <th>Field</th>
+                                                                        <th>Value</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="list">
+                                                                    <tr v-bind:key="index" v-if="field != 'Status' && field != 'Password' && field != 'Username'" v-for="(value, field, index) in activeUser">
+                                                                        <th scope="row">
+                                                                            <div class="media align-items-center">
+                                                                                <div class="media-body"><span class="name mb-0 text-sm">{{field}}</span></div>
+                                                                            </div>
+                                                                        </th>
+                                                                        <td>
+                                                                            <div class="media align-items-center">
+                                                                                <div class="media-body"><span class="name mb-0 text-sm">{{value}}</span></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button @click="toggleUserDetails(activeUser)" type="button" class="btn btn-neutral">
+                                                                Close
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Table Users -->
                                             <table class="table tablesorter table align-items-center table-flush">
                                                 <thead class="thead-light">
                                                     <tr>
@@ -63,9 +106,9 @@
                                                             </div>
                                                         </th>
                                                         <td v-if="user.Status == 0">
-                                                            <button class="btn btn-info my-1">Details</button>
+                                                            <button @click="toggleUserDetails(user)" class="btn btn-info my-1">Details</button>
                                                             <button @click="rejectUser(user)" class="btn btn-danger my-1">Reject</button>
-                                                            <button @click="validateUser(user)" class="btn btn-success my-1">Accept</button>
+                                                            <button @click="validateUser(user)" class="btn btn-success my-1">Verify</button>
                                                         </td>
                                                         <td v-else-if="user.Status == 1">
                                                             <span class="badge badge-dot mr-4 badge-success"><i class="bg-success"></i><span class="status">Verified</span></span>
@@ -110,14 +153,21 @@ export default {
             isFetchingValidation: false,
             category: ['Pending', 'Verified', 'Rejected'],
             activeCategory: 0,
+            activeUser: {},
             users: [],
-            targetedUser: {}
+            targetedUser: {},
+            showUserDetails: "modal fade show d-none"
         }
     },
 
     methods: mapActions({
         toggleCategory(dispatch, index) {
             this.activeCategory = index;
+        },
+
+        toggleUserDetails(dispatch, user) {
+            this.showUserDetails = this.showUserDetails == "modal fade show d-none" ? "modal fade show d-block" : "modal fade show d-none";
+            this.activeUser = user;
         },
 
         setTargetUser(dispatch, user) {
