@@ -3,7 +3,6 @@ import Router from "vue-router";
 import PrivateHeader from "./layout/PrivateHeader";
 import AppHeader from "./layout/AppHeader";
 import AppFooter from "./layout/AppFooter";
-import Components from "./views/Components.vue";
 import Landing from "./views/Landing.vue";
 import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
@@ -11,20 +10,13 @@ import Profile from "./views/Profile.vue";
 import AdminLogin from "./views/admin/Login.vue";
 import AdminConfirmation from "./views/admin/Confirmation.vue";
 
+import store from './store';
+
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   linkExactActiveClass: "active",
   routes: [
-    {
-      path: "/components",
-      name: "components",
-      components: {
-        header: AppHeader,
-        default: Components,
-        footer: AppFooter
-      }
-    },
     {
       path: "/",
       name: "landing",
@@ -32,6 +24,9 @@ export default new Router({
         header: AppHeader,
         default: Landing,
         footer: AppFooter
+      },
+      meta: {
+        public: true
       }
     },
     {
@@ -41,6 +36,10 @@ export default new Router({
         header: AppHeader,
         default: Login,
         footer: AppFooter
+      },
+      meta: {
+        public: true,
+        onlyUserLoggedOut: true
       }
     },
     {
@@ -50,6 +49,10 @@ export default new Router({
         header: AppHeader,
         default: Register,
         footer: AppFooter
+      },
+      meta: {
+        public: true,
+        onlyUserLoggedOut: true
       }
     },
     {
@@ -59,6 +62,9 @@ export default new Router({
         header: PrivateHeader,
         default: Profile,
         footer: AppFooter
+      },
+      meta: {
+        onlyUser: true
       }
     },
     {
@@ -68,6 +74,10 @@ export default new Router({
         header: AppHeader,
         default: AdminLogin,
         footer: AppFooter
+      },
+      meta: {
+        public: true,
+        onlyAdminLoggedOut: true
       }
     },
     {
@@ -77,6 +87,9 @@ export default new Router({
         header: PrivateHeader,
         default: AdminConfirmation,
         footer: AppFooter
+      },
+      meta: {
+        onlyAdmin: true
       }
     }
   ],
@@ -88,3 +101,38 @@ export default new Router({
     }
   }
 });
+
+router.beforeEach((to, from, next) => {
+  const userAuthed = store.state.userProfile ? true : false;
+  const adminAuthed = store.state.admin ? true : false;
+  const onlyUser = to.matched.some(record => record.meta.onlyUser);
+  const onlyAdmin = to.matched.some(record => record.meta.onlyAdmin);
+  const onlyUserLoggedOut = to.matched.some(record => record.meta.onlyUserLoggedOut);
+  const onlyAdminLoggedOut = to.matched.some(record => record.meta.onlyAdminLoggedOut);
+  const isPublic = to.matched.some(record => record.meta.public);
+
+  // if (!isPublic && !userAuthed || !isPublic && !adminAuthed) {
+  //   // this route requires auth, check if logged in
+  //   // if not, redirect to login page.
+  //   return next({
+  //     path: '/'
+  //   })
+  // }
+
+
+  if(onlyUser && !userAuthed) {
+    return next({
+      path: '/login'
+    })
+  }
+
+  if(onlyAdmin && !adminAuthed) {
+    return next({
+      path: '/admin-login'
+    })
+  }
+
+  next()
+})
+
+export default router;
