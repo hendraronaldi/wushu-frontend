@@ -24,6 +24,12 @@
                     </a>
                 </li>
                 <li class="nav-item d-lg-block ml-lg-4">
+                    <button @click="profile()" href="" rel="noopener"
+                        class="btn btn-primary btn-icon"
+                        >
+                        <span class="nav-link-inner--text">Profile</span>
+                    </button>
+
                     <button @click="logout()" href="" rel="noopener"
                         class="btn btn-primary btn-icon"
                         style="background:grey; border-color:grey"
@@ -49,6 +55,10 @@ export default {
         };
     },
     methods: mapActions({
+        profile(dispatch){
+            this.$router.push("/profile");
+        },
+
         logout(dispatch){
             const {userProfile} = this.$store.state;
             this.isFetching = true;

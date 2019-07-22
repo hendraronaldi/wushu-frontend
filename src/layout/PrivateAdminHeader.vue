@@ -24,6 +24,11 @@
                     </a>
                 </li>
                 <li class="nav-item d-lg-block ml-lg-4">
+                    <button @click="adminPage()" href="" rel="noopener"
+                        class="btn btn-primary btn-icon"
+                        >
+                        <span class="nav-link-inner--text">Admin</span>
+                    </button>
                     <button @click="adminLogout()" href="" rel="noopener"
                         class="btn btn-primary btn-icon"
                         style="background:grey; border-color:grey"
@@ -49,6 +54,10 @@ export default {
         };
     },
     methods: mapActions({
+        adminPage(dispatch){
+            this.$router.push("/admin-confirmation");
+        },
+
         adminLogout(dispatch){
             const {userProfile} = this.$store.state;
             this.isFetching = true;
