@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import PrivateHeader from "./layout/PrivateHeader";
+import PrivateAdminHeader from "./layout/PrivateAdminHeader";
 import AppHeader from "./layout/AppHeader";
 import AppFooter from "./layout/AppFooter";
 import Landing from "./views/Landing.vue";
@@ -21,7 +22,7 @@ const router = new Router({
       path: "/",
       name: "landing",
       components: {
-        header: AppHeader,
+        header: store.state.userProfile != null ? PrivateHeader : AppHeader,
         default: Landing,
         footer: AppFooter
       },
@@ -33,7 +34,7 @@ const router = new Router({
       path: "/login",
       name: "login",
       components: {
-        header: AppHeader,
+        header: store.state.userProfile != null ? PrivateHeader : AppHeader,
         default: Login,
         footer: AppFooter
       },
@@ -46,7 +47,7 @@ const router = new Router({
       path: "/register",
       name: "register",
       components: {
-        header: AppHeader,
+        header: store.state.userProfile != null ? PrivateHeader : AppHeader,
         default: Register,
         footer: AppFooter
       },
@@ -71,7 +72,7 @@ const router = new Router({
       path: "/admin-login",
       name: "admin-login",
       components: {
-        header: AppHeader,
+        header: store.state.admin != null ? PrivateAdminHeader : AppHeader,
         default: AdminLogin,
         footer: AppFooter
       },
@@ -84,7 +85,7 @@ const router = new Router({
       path: "/admin-confirmation",
       name: "admin-confirmation",
       components: {
-        header: PrivateHeader,
+        header: PrivateAdminHeader,
         default: AdminConfirmation,
         footer: AppFooter
       },
@@ -110,15 +111,6 @@ router.beforeEach((to, from, next) => {
   const onlyUserLoggedOut = to.matched.some(record => record.meta.onlyUserLoggedOut);
   const onlyAdminLoggedOut = to.matched.some(record => record.meta.onlyAdminLoggedOut);
   const isPublic = to.matched.some(record => record.meta.public);
-
-  // if (!isPublic && !userAuthed || !isPublic && !adminAuthed) {
-  //   // this route requires auth, check if logged in
-  //   // if not, redirect to login page.
-  //   return next({
-  //     path: '/'
-  //   })
-  // }
-
 
   if(onlyUser && !userAuthed) {
     return next({
