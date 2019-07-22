@@ -21,8 +21,13 @@
                 <div class="container shape-container d-flex">
                     <div class="col px-0">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <h1 class="display-3  text-white">Wushu Teratai Putih
+                            <div class="col-lg-6 text-center">
+                                <img src="img/brand/TP_01_Med.png" alt=""
+                                    style="height:auto; max-width: 250px;"
+                                >
+                            </div>
+                            <div class="col-lg-6 text-center">
+                                <h1 class="display-3 text-white">Wushu Teratai Putih
                                     <span>北少林, 白莲们</span>
                                     <span>Bandung, Indonesia</span>
                                 </h1>
