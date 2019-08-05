@@ -89,7 +89,7 @@
                                     <h6 class="heading-small text-muted mb-4">User information</h6>
                                     <div class="pl-lg-4">
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-12">
                                                 <div class="form-group has-label">
                                                     <label class="form-control-label">
                                                         Full name
@@ -98,6 +98,8 @@
                                                     <input v-else aria-describedby="addon-right addon-left" alternative="" v-bind:placeholder="userProfile.Name" class="form-control form-control-alternative" disabled>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-group has-label">
                                                     <label class="form-control-label">
@@ -105,17 +107,6 @@
                                                     </label>
                                                     <input v-model="user.nameparent" v-if="isEditProfile" aria-describedby="addon-right addon-left" alternative="" v-bind:placeholder="userProfile.NameParent" class="form-control form-control-alternative">
                                                     <input v-else aria-describedby="addon-right addon-left" alternative="" v-bind:placeholder="userProfile.NameParent" class="form-control form-control-alternative" disabled>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="form-group has-label">
-                                                    <label class="form-control-label">
-                                                        Email
-                                                    </label>
-                                                    <input v-model="user.email" v-if="isEditProfile" aria-describedby="addon-right addon-left" alternative="" v-bind:placeholder="userProfile.Email" class="form-control form-control-alternative">
-                                                    <input v-else aria-describedby="addon-right addon-left" alternative="" v-bind:placeholder="userProfile.Email" class="form-control form-control-alternative" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
