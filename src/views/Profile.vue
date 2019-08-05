@@ -76,7 +76,7 @@
                                 <div class="border-0">
                                     <div class="row align-items-center">
                                         <div class="col-8">
-                                            <h3 class="mb-0">My account ({{userProfile.Username}})</h3>
+                                            <h3 class="mb-0">My account ({{userProfile.Name}})</h3>
                                         </div>
                                         <div v-if="!isEditProfile" class="col-4 text-right">
                                             <button @click="toggleEditProfile()" class="btn btn-sm btn-info">Edit Profile</button>
@@ -288,7 +288,6 @@ export default {
             user: {
                 name: this.$store.state.userProfile.Name,
                 address: this.$store.state.userProfile.Address,
-                username: this.$store.state.userProfile.Username,
                 email: this.$store.state.userProfile.Email,
                 password: this.$store.state.userProfile.Password,
                 birthplace: this.$store.state.userProfile.Birthplace,

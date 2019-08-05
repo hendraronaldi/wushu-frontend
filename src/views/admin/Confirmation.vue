@@ -66,7 +66,7 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody class="list">
-                                                                    <tr v-bind:key="index" v-if="field != 'Status' && field != 'Password' && field != 'Username'" v-for="(value, field, index) in activeUser">
+                                                                    <tr v-bind:key="index" v-if="field != 'Status' && field != 'Password'" v-for="(value, field, index) in activeUser">
                                                                         <th scope="row">
                                                                             <div class="media align-items-center">
                                                                                 <div class="media-body"><span class="name mb-0 text-sm">{{field}}</span></div>
@@ -99,7 +99,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody class="list">
-                                                    <tr v-bind:key="user.Username" v-for="user in users" v-if="user.Status == activeCategory">
+                                                    <tr v-bind:key="user.Email" v-for="user in users" v-if="user.Status == activeCategory">
                                                         <th scope="row">
                                                             <div class="media align-items-center">
                                                                 <div class="media-body"><span class="name mb-0 text-sm">{{user.Name}}</span></div>
@@ -183,7 +183,7 @@ export default {
             dispatch('validateUser', {targetedUser})
             .then((response) => {
                 alert("User is validated")
-                this.users = this.users.filter(user => user.Username != response.Username);
+                this.users = this.users.filter(user => user.Email != response.Email);
                 this.users.push(response);
             })
             .catch(error => {
@@ -201,7 +201,7 @@ export default {
             dispatch('rejectUser', {targetedUser})
             .then((response) => {
                 alert("User is rejected")
-                this.users = this.users.filter(user => user.Username != response.Username);
+                this.users = this.users.filter(user => user.Email != response.Email);
                 this.users.push(response);
             })
             .catch(error => {

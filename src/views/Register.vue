@@ -19,7 +19,7 @@
 
         <template>
             <div v-if="fail" class="alert alert-danger fade show" role="alert">
-                User existed already, please change your username
+                User existed already, please change your email
             </div>
             <div v-else></div>
         </template>
@@ -43,14 +43,6 @@
                                         </span>
                                     </div>
                                     <input v-model="user.name" aria-describedby="addon-right addon-left" placeholder="Name" class="form-control" required>
-                                </div>
-                                <div class="form-group mb-3 input-group input-group-alternative">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="ni ni-single-02"></i>
-                                        </span>
-                                    </div>
-                                    <input v-model="user.username" aria-describedby="addon-right addon-left" placeholder="Username" class="form-control" required>
                                 </div>
                                 <div class="form-group mb-3 input-group input-group-alternative">
                                 <div class="input-group-prepend">
@@ -179,7 +171,6 @@ export default {
         return {
             user: {
                 name: "",
-                username: "",
                 email: "",
                 password: "",
                 birthdate: "2019-07-17",

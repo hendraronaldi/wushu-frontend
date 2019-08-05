@@ -19,7 +19,7 @@
 
         <template>
             <div v-show="fail" class="alert alert-danger fade show" role="alert">
-                Wrong username or password, please try again
+                Wrong email or password, please try again
             </div>
         </template>
 
@@ -38,10 +38,10 @@
                                 <div class="form-group mb-3 input-group input-group-alternative">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
-                                            <i class="ni ni-single-02"></i>
+                                            <i class="ni ni-email-83"></i>
                                         </span>
                                     </div>
-                                    <input v-model="user.username" aria-describedby="addon-right addon-left" placeholder="Username" class="form-control" required>
+                                    <input v-model="user.email" aria-describedby="addon-right addon-left" placeholder="Email" class="form-control" required>
                                 </div>
                                 <div class="form-group input-group input-group-alternative">
                                     <div class="input-group-prepend">
@@ -87,7 +87,7 @@ export default {
     data() {
         return {
             user: {
-                username: "",
+                email: "",
                 password: ""
             },
             isFetching: false,
